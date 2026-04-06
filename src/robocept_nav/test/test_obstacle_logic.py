@@ -10,7 +10,7 @@ def compute_safe_velocity(
     max_linear=0.5, max_angular=1.5,
 ):
     """Pure-function version of obstacle avoidance logic for testing."""
-    if front_dist < min_dist:
+    if front_dist < min_dist and linear >= 0.0:
         safe_linear = 0.0
         if obstacle_angle >= 0:
             safe_angular = -escape_vel
@@ -62,6 +62,12 @@ class TestObstacleAvoidance:
         """Reversing should not be slowed by front obstacles."""
         lin, ang = compute_safe_velocity(-0.3, 0.0, 0.5, 0.0)
         assert lin == pytest.approx(-0.3)
+
+    def test_reverse_not_blocked_in_emergency_zone(self):
+        """Reverse should remain available to escape a front obstacle."""
+        lin, ang = compute_safe_velocity(-0.3, 0.0, 0.2, 0.1)
+        assert lin == pytest.approx(-0.3)
+        assert ang == pytest.approx(0.0)
 
     def test_velocity_clamping(self):
         lin, ang = compute_safe_velocity(2.0, 5.0, 2.0, 0.0)

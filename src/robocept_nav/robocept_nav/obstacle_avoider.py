@@ -108,7 +108,7 @@ class ObstacleAvoider(Node):
         linear = self.upstream_cmd.linear.x
         angular = self.upstream_cmd.angular.z
 
-        if front_dist < self.min_dist:
+        if front_dist < self.min_dist and linear >= 0.0:
             # Emergency: obstacle too close. Stop and rotate away.
             safe_cmd.linear.x = 0.0
             # Rotate away from the obstacle.
