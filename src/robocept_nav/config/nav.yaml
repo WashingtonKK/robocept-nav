@@ -1,0 +1,17 @@
+# Navigation parameters.
+
+/**:
+  ros__parameters:
+    # --- Obstacle avoidance ---
+    min_obstacle_distance: 0.35    # meters — full stop below this
+    slowdown_distance: 0.8         # meters — scale speed below this
+    max_linear_vel: 0.5            # m/s
+    max_angular_vel: 1.5           # rad/s
+    scan_angle_front_deg: 60.0     # degrees — front FOV to check
+    escape_angular_vel: 0.8        # rad/s — rotation speed when escaping
+
+    # --- Waypoint navigation ---
+    goal_tolerance_xy: 0.15        # meters
+    goal_tolerance_theta: 0.2      # radians
+    kp_linear: 0.8                 # proportional gain for distance
+    kp_angular: 2.0                # proportional gain for heading
